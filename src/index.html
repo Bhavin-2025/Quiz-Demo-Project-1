@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-Demo</title>
+    <link rel="stylesheet" href="/src/output.css">
+</head>
+
+<body class="bg-gray-200">
+    <div class="min-h-screen flex flex-col items-center justify-center">
+        <div id="quiz-container" class="w-full max-w-2xl bg-white p-6 rounded-2xl shadow-xl space-y-4">
+            <div class="text-2xl font-extrabold text-blue-700 ">Quiz-Demo</div>
+            <div class="text-xl font-bold text-gray-700">Built using HTML / CSS /JavaScript</div>
+            <div class=" flex justify-between items-center text-xl font-semibold ">
+                <div id="question-count">Question 1 of 20</div>
+                <div id="timer" class="text-red-500">Time: 10s</div>
+            </div>
+            <h2 id="question" class="text-xl font-bold text-gray-900 pt-2">Loading question...</h2>
+            <!-- option section -->
+            <div id="options" class="space-y-3">
+            </div>
+
+            <div class="flex justify-end pt-4">
+                <button id="next-btn"
+                    class="bg-blue-600 hover:bg-blue-700 transition text-white rounded px-5 py-2 text-lg disabled:opacity-50"
+                    disabled>Next
+                </button>
+
+                <button id="submit-btn"
+                    class="bg-green-600 hover:bg-green-700 transition text-white rounded px-5 py-2 text-lg hidden">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
