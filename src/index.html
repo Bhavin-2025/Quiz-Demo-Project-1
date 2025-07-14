@@ -2,40 +2,119 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz-Demo</title>
-    <link rel="stylesheet" href="/src/output.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz-Demo</title>
+  <link rel="stylesheet" href="/src/output.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+
+  <script src="script.js" defer></script>
+   <style>
+    #warning {
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+  </style>
 </head>
 
-<body class="bg-gray-200">
-    <div class="min-h-screen flex flex-col items-center justify-center">
-        <div id="quiz-container" class="w-full max-w-2xl bg-white p-6 rounded-2xl shadow-xl space-y-4">
-            <div class="text-2xl font-extrabold text-blue-700 ">Quiz-Demo</div>
-            <div class="text-xl font-bold text-gray-700">Built using HTML / CSS /JavaScript</div>
-            <div class=" flex justify-between items-center text-xl font-semibold ">
-                <div id="question-count">Question 1 of 20</div>
-                <div id="timer" class="text-red-500">Time: 10s</div>
-            </div>
-            <h2 id="question" class="text-xl font-bold text-gray-900 pt-2">Loading question...</h2>
-            <!-- option section -->
-            <div id="options" class="space-y-3">
-            </div>
+<body class="bg-gradient-to-br from-sky-100 to-indigo-100 min-h-screen flex items-center justify-center font-sans">
+  <div class="w-full max-w-2xl p-4">
 
-            <div class="flex justify-end pt-4">
-                <button id="next-btn"
-                    class="bg-blue-600 hover:bg-blue-700 transition text-white rounded px-5 py-2 text-lg disabled:opacity-50"
-                    disabled>Next
-                </button>
+    <!-- Start Container -->
+    <div id="start-container"
+      class="bg-white shadow-2xl rounded-3xl px-10 py-8 space-y-6 border-l-4 border-indigo-600 transition-all">
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <img src="https://media.designrush.com/agencies/461126/conversions/Sarvadhi-Solutions-logo-profile.jpg"
+          alt="Company Logo" class="h-20 w-auto object-contain rounded-lg shadow border border-gray-300" />
+      </div>
 
-                <button id="submit-btn"
-                    class="bg-green-600 hover:bg-green-700 transition text-white rounded px-5 py-2 text-lg hidden">
-                    Submit
-                </button>
-            </div>
-        </div>
+      <h1 class="text-4xl font-extrabold text-indigo-700 text-center tracking-wide">🚀 Welcome to the Quiz!</h1>
+      <p class="text-base text-gray-600 text-center">Please fill your details before starting</p>
+
+      <div class="space-y-4">
+        <input id="user-name" type="text" placeholder="Full Name"
+          class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        <input id="college-name" type="text" placeholder="College Name"
+          class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        <input id="roll-number" type="text" placeholder="College Roll Number"
+          class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        <input id="batch-year" type="text" placeholder="Batch Year (e.g., 2023)"
+          class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        <input id="dob" type="date"
+          class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        <input id="experience" type="text" placeholder="Past Experience"
+          class="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+      </div>
+
+      <div class="pt-4 text-center">
+        <button id="start-btn"
+          class="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full px-10 py-3 shadow-md focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 opacity-50 cursor-not-allowed transition duration-200"
+          disabled>
+          🎯 Start Quiz
+        </button>
+      </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Quiz Container -->
+    <div id="quiz-container"
+      class="bg-white shadow-2xl rounded-3xl px-10 py-8 space-y-6 border-l-4 border-blue-600 transition-all hidden">
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <div class="flex justify-center mb-6">
+          <img src="https://media.designrush.com/agencies/461126/conversions/Sarvadhi-Solutions-logo-profile.jpg"
+            alt="Company Logo" class="h-20 w-auto object-contain rounded-lg shadow border border-gray-300" />
+        </div>
+
+      </div>
+
+      <div class="text-2xl font-bold text-blue-700 text-center tracking-wide">🧠 Quiz-Demo</div>
+      <div class="text-sm text-gray-500 text-center mb-4">Built using HTML, Tailwind CSS & JavaScript</div>
+
+      <div class="flex justify-between items-center bg-gray-50 px-4 py-2 rounded-lg shadow-inner border">
+        <div id="question-count" class="text-base font-semibold text-gray-800">Question 1 of 20</div>
+        <div id="timer" class="text-base font-bold text-red-600">⏱ Time: 10s</div>
+      </div>
+
+      <h2 id="question" class="text-lg font-semibold text-gray-900 mt-2">Loading question...</h2>
+
+      <div id="options" class="space-y-3 transition-all duration-200">
+        <!-- Options will be injected by JavaScript -->
+      </div>
+
+      <div class="flex justify-between items-center pt-4">
+        <button id="prev-btn"
+          class="bg-gray-400 hover:bg-gray-500 text-white text-sm font-medium px-5 py-2 rounded-full shadow transition hidden">
+          Previous
+        </button>
+
+        <div class="space-x-2">
+          <button id="next-btn"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-6 py-2 rounded-full shadow disabled:opacity-50 transition"
+            disabled>
+            Next
+          </button>
+
+          <button id="submit-btn"
+            class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-6 py-2 rounded-full shadow hidden transition">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <video id="webcam" autoplay muted playsinline
+  class="hidden absolute top-4 right-4 w-40 h-32 border-2 border-blue-500 rounded-md shadow-md z-50"></video>
+
+<!-- ⚠️ Face Detection Warning -->
+<div id="warning"
+  class="hidden absolute top-4 right-4 mt-36 text-red-600 font-semibold bg-red-100 border border-red-400 px-4 py-2 rounded-md shadow-md z-50">
+  ⚠️ Face not detected! Please stay visible.
+</div>
+
+
+  </div>
 </body>
 
 </html>
